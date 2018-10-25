@@ -24,7 +24,7 @@ def resize(arr, target_size):
     return map_coordinates(arr, coords)
 
 
-def regridJakarta():
+def regrid():
     # Defined Variables
     # -5.822970, 105.618977
     # -6.066936, 106.020435
@@ -55,7 +55,7 @@ def regridJakarta():
     nc_file = Dataset(nc_file, 'r', format="NETCDF4")
     xcor = nc_file['XCOR'][:]
     ycor = nc_file['YCOR'][:]
-    time_f = num2date(nc_file['time'][:], 'seconds since 2018-10-01 00:00:00', 'proleptic_gregorian')
+    time_f = num2date(nc_file['time'][:], 'seconds since 2018-01-01 00:00:00', 'proleptic_gregorian')
     s1 = nc_file['S1'][:]
     u1 = nc_file['U1'][:]
     v1 = nc_file['V1'][:]
@@ -63,8 +63,8 @@ def regridJakarta():
     # windv = nc_file['WINDV'][:]
 
     # Load tkl file
-    array_swh = np.zeros((10, s1.shape[1], s1.shape[2]))
-    array_dir = np.zeros((10, s1.shape[1], s1.shape[2]))
+    array_swh = np.zeros((337, s1.shape[1], s1.shape[2]))
+    array_dir = np.zeros((337, s1.shape[1], s1.shape[2]))
     f_swh = open(wave_height_tkl)
     f_dir = open(wave_dir_tkl)
     lines_swh = f_swh.readlines()
@@ -101,13 +101,13 @@ def regridJakarta():
     v_wave = abs(array_swh) * np.cos((math.pi / 180) * array_dir)
 
     # Create grid
-    arr_s1 = np.zeros((50, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
-    arr_u1 = np.zeros((50, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
-    arr_v1 = np.zeros((50, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
-    arr_windu = np.zeros((50, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
-    arr_windv = np.zeros((50, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
-    arr_waveu = np.zeros((50, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
-    arr_wavev = np.zeros((50, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
+    arr_s1 = np.zeros((337, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
+    arr_u1 = np.zeros((337, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
+    arr_v1 = np.zeros((337, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
+    arr_windu = np.zeros((337, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
+    arr_windv = np.zeros((337, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
+    arr_waveu = np.zeros((337, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
+    arr_wavev = np.zeros((337, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
     for idt, time in enumerate(s1):
         for idx, x in enumerate(time):
             for idy, y in enumerate(x):
@@ -120,7 +120,7 @@ def regridJakarta():
                 # arr_windv[idt, lat_near, lng_near] = windv[idt, idx, idy]
                 arr_u1[idt, lat_near, lng_near] = u1[idt, 0, idx, idy]
                 arr_v1[idt, lat_near, lng_near] = v1[idt, 0, idx, idy]
-                if idt < 9:
+                if idt < 337:
                     arr_waveu[idt, lat_near, lng_near] = u_wave[idt, idx, idy]
                     arr_wavev[idt, lat_near, lng_near] = v_wave[idt, idx, idy]
 
@@ -167,4 +167,4 @@ def find_nearest(array, value):
 
 
 if __name__ == '__main__':
-    regridJakarta()
+    regrid()

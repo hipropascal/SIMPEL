@@ -27,9 +27,9 @@ def resize(arr, target_size):
 def regrid():
     # Defined Variables
     lat1 = -8.114958
-    lng1 = 114.342588
+    lng1 = 114.375859
     lat2 = -8.260393
-    lng2 = 114.491698
+    lng2 = 114.475508
     interval = 0.0017  # ~300m
     nc_file = '/Users/maritim/Project/BMKG/SIMPEL/data/raw/model_delf3d/0_ketapang gilimanuk/bundle.nc'
     wave_height_tkl = '/Users/maritim/Project/BMKG/SIMPEL/data/raw/model_delf3d/0_ketapang gilimanuk/wave_height.tkl'
@@ -59,8 +59,8 @@ def regrid():
     v1 = nc_file['V1'][:]
 
     # Load tkl file
-    array_swh = np.zeros((10, s1.shape[1], s1.shape[2]))
-    array_dir = np.zeros((10, s1.shape[1], s1.shape[2]))
+    array_swh = np.zeros((505, s1.shape[1], s1.shape[2]))
+    array_dir = np.zeros((505, s1.shape[1], s1.shape[2]))
     f_swh = open(wave_height_tkl)
     f_dir = open(wave_dir_tkl)
     lines_swh = f_swh.readlines()
@@ -77,7 +77,7 @@ def regrid():
             arr_resize = resize(arr_tmp[:], (array_swh[0].shape[0], array_swh[0].shape[1]))
             array_swh[mat] = arr_resize[:]
             mat = mat + 1
-            if mat == 10:
+            if mat == 504:
                 break
 
     mat = 0
@@ -90,18 +90,18 @@ def regrid():
             arr_resize = resize(arr_tmp[:], (array_dir[0].shape[0], array_swh[0].shape[1]))
             array_dir[mat] = arr_resize[:]
             mat = mat + 1
-            if mat == 10:
+            if mat == 504:
                 break
 
     u_wave = abs(array_swh) * np.sin((math.pi / 180) * array_dir)
     v_wave = abs(array_swh) * np.cos((math.pi / 180) * array_dir)
 
     # Create grid
-    arr_s1 = np.zeros((50, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
-    arr_u1 = np.zeros((50, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
-    arr_v1 = np.zeros((50, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
-    arr_waveu = np.zeros((50, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
-    arr_wavev = np.zeros((50, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
+    arr_s1 = np.zeros((505, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
+    arr_u1 = np.zeros((505, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
+    arr_v1 = np.zeros((505, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
+    arr_waveu = np.zeros((505, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
+    arr_wavev = np.zeros((505, array_lat.shape[0], array_lng.shape[0]), dtype=np.float)
     for idt, time in enumerate(s1):
         for idx, x in enumerate(time):
             for idy, y in enumerate(x):
@@ -112,7 +112,7 @@ def regrid():
                 arr_s1[idt, lat_near, lng_near] = s1[idt, idx, idy]
                 arr_u1[idt, lat_near, lng_near] = u1[idt, 0, idx, idy]
                 arr_v1[idt, lat_near, lng_near] = v1[idt, 0, idx, idy]
-                if idt < 9:
+                if idt < 505:
                     arr_waveu[idt, lat_near, lng_near] = u_wave[idt, idx, idy]
                     arr_wavev[idt, lat_near, lng_near] = v_wave[idt, idx, idy]
 

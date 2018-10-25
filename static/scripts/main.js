@@ -178,7 +178,7 @@ function loadGeoJson() {
     $.get('/api/get_geojson/', function (res) {
         var areas = res.data;
         for (var i = 0; i < areas.length; i++) {
-            L.geoJSON(areas[i], {style: {dashArray: [4, 4], color: '#ff740e', weight: 1}}).addTo(map);
+            L.geoJSON(areas[i], {style: {dashArray: [4, 4], color: '#ff740e', weight: 2}}).addTo(map);
         }
     });
 }
@@ -296,7 +296,12 @@ function load_param_pred_map() {
                 }
             });
             $("#hour-grid").change(function () {
-                loadImagePredMap();
+                if (activemenu === 'observasi') {
+                    loadImageObs();
+                }
+                if (activemenu === 'peta_prakiraan') {
+                    loadImagePredMap();
+                }
             });
             loadImagePredMap();
         });
@@ -305,6 +310,9 @@ function load_param_pred_map() {
 
 function loadhourgrid() {
     var index = grid_date.indexOf($("#date-grid").val());
+    if (index === -1) {
+        $("#date-grid").datepicker('setDate', grid_date[grid_date.length - 1]);
+    }
     var hours = grid_date_obj[index].hours;
     $("#hour-grid").html("");
     for (var i = 0; i < hours.length; i++) {
@@ -346,9 +354,20 @@ function plotMapList() {
                 loadhourgrid();
                 $("#date-grid").change(function () {
                     loadhourgrid();
+                    if (activemenu === 'observasi') {
+                        loadImageObs();
+                    }
+                    if (activemenu === 'peta_prakiraan') {
+                        loadImagePredMap();
+                    }
                 });
                 $("#hour-grid").change(function () {
-                    loadImagePredMap();
+                    if (activemenu === 'observasi') {
+                        loadImageObs();
+                    }
+                    if (activemenu === 'peta_prakiraan') {
+                        loadImagePredMap();
+                    }
                 });
                 loadImageObs();
             });
@@ -403,6 +422,7 @@ function loadLayerObs(category, data, order) {
         })
     }
 }
+
 
 function loadLayerPred(area, coor, loc, param, order) {
     $.get('/api/prakiraan/data/' + area + '/' + coor + '/' + loc + '/' + param, function (res) {
