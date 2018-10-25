@@ -18,8 +18,8 @@ for file in glob.glob("*.nc"):
     v = np.rot90(v)
     u = np.rot90(u)
     parsed = file.split("_")
-    dd = parsed[3]
-    mm = parsed[4]
+    mm = parsed[3]
+    dd = parsed[4]
     yyyy = parsed[2]
     h = parsed[5][:2]
     m = parsed[5][2:4]
@@ -28,3 +28,6 @@ for file in glob.glob("*.nc"):
     img.save(out+new_filename)
 
 #114.433235 - 114.435916
+
+# /Users/maritim/Project/BMKG/SIMPEL/data/data_trees/0_ketapang gilimanuk__-8.148774__114.420108__13/observasi/3_HF Radar__grid/0_Arus (knot)|0|8/11-10-2018 21_30.png
+# /Users/maritim/Project/BMKG/SIMPEL/data/data_trees/0_ketapang gilimanuk__-8.148774__114.420108__13/peta_prakiraan/1_Level Permukaan(meter)__grid/11-10-2018 21_30.png

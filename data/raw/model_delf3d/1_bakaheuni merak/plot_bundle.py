@@ -81,7 +81,7 @@ def regrid():
             arr_resize = resize(arr_tmp[:], (array_swh[0].shape[0], array_swh[0].shape[1]))
             array_swh[mat] = arr_resize[:]
             mat = mat + 1
-            if mat == 10:
+            if mat == 336:
                 break
 
     mat = 0
@@ -94,7 +94,7 @@ def regrid():
             arr_resize = resize(arr_tmp[:], (array_dir[0].shape[0], array_swh[0].shape[1]))
             array_dir[mat] = arr_resize[:]
             mat = mat + 1
-            if mat == 10:
+            if mat == 336:
                 break
 
     u_wave = abs(array_swh) * np.sin((math.pi / 180) * array_dir)
