@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simpel BMKG</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/leaflet.css">
+    <link rel="stylesheet" href="../static/styles/display.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link href="https://fonts.googleapis.com/css?family=Niconne|Roboto" rel="stylesheet">
+</head>
+<body>
+<div id="map"></div>
+<div class="nav-main">
+    <div class="nav-top">
+        <div class="nav-title">
+            <div class="menu-button"><i class="fas fa-bars fa-2x"></i></div>
+            <div class="logo">
+                <h1 style="align-self: center; justify-self: center;flex: 1;text-align: justify;alignment: center;margin-right: 10px">
+                    Simpel</h1>
+                <h4 style="margin: 8px 0 0 0">Teluk Jakarta</h4>
+                <div class="bmkg-logo"></div>
+            </div>
+        </div>
+        <div class="svg-layer">
+            <svg xmlns="http://www.w3.org/2000/svg" class="svg-layer-line" id="svg-line-connect" width="1000" height="500" version="1.1">
+
+            </svg>
+        </div>
+    </div>
+    <div class="nav-bottom">
+        <div class="info-section">
+            <div class="info">
+                <div class="play-button">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="info-group">
+                    <div class="info-content">
+                        <div class="circle marker-1"></div>
+                        <div style="flex: 1; margin-left: 10px">Prakiraan 1</div>
+                    </div>
+                    <div class="info-content">
+                        <div class="circle marker-2"></div>
+                        <div style="flex: 1; margin-left: 10px">Prakiraan 2</div>
+                    </div>
+                    <div class="info-content">
+                        <div class="circle marker-3"></div>
+                        <div style="flex: 1; margin-left: 10px">Prakiraan 3</div>
+                    </div>
+                    <div class="info-content">
+                        <div class="circle marker-4"></div>
+                        <div style="flex: 1; margin-left: 10px">Prakiraan 4</div>
+                    </div>
+                    <div class="info-content">
+                        <div class="circle marker-5"></div>
+                        <div style="flex: 1; margin-left: 10px">Prakiraan 5</div>
+                    </div>
+                    <!-- <div class="info-content">
+                        <div class="circle marker-6"></div>
+                        <div style="flex: 1; margin-left: 10px"> 6</div>
+                    </div>
+                    <div class="info-content">
+                        <div class="circle marker-7"></div>
+                        <div style="flex: 1; margin-left: 10px"> 7</div>
+                    </div>
+                    <div class="info-content">
+                        <div class="circle marker-8"></div>
+                        <div style="flex: 1; margin-left: 10px">8</div>
+                    </div> -->
+                    <div class="info-content">
+                        <div class="square marker-obs-1"></div>
+                        <div style="flex: 1; margin-left: 10px">Observasi 1</div>
+                    </div>
+                    <div class="info-content">
+                        <div class="square marker-obs-2"></div>
+                        <div style="flex: 1; margin-left: 10px">Observasi 2</div>
+                    </div>
+                    <div class="info-content">
+                        <div class="square marker-obs-3"></div>
+                        <div style="flex: 1; margin-left: 10px">Observasi 3</div>
+                    </div>
+      <!--              <div class="info-content">
+                        <div class="square marker-4"></div>
+                        <div style="flex: 1; margin-left: 10px">Observasi 4</div>
+                    </div>
+                    <div class="info-content">
+                        <div class="square marker-5"></div>
+                        <div style="flex: 1; margin-left: 10px">Observasi 5</div>
+                    </div>
+                    <div class="info-content">
+                        <div class="square marker-6"></div>
+                        <div style="flex: 1; margin-left: 10px">Observasi 6</div>
+                    </div>
+                    <div class="info-content">
+                        <div class="square marker-7"></div>
+                        <div style="flex: 1; margin-left: 10px">Observasi 7</div>
+                    </div>
+                    <div class="info-content">
+                        <div class="square marker-8"></div>
+                        <div style="flex: 1; margin-left: 10px">Observasi 8</div>
+                    </div>-->
+                </div>
+            </div>
+            <div class="graph"></div>
+        </div>
+        <div class="bottom-bar">
+            <div style="flex: 1"></div>
+            <div style="width: 248px;align-self: center">© BMKG Pusat Meteorologi Maritim 2018</div>
+            <div style="flex: 1"></div>
+        </div>
+    </div>
+</div>
+<div class="nav-side">
+    <div class="nav-left">
+        <div class="close-nav-side"><i class="fas fa-times fa-2x"></i></div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/leaflet.js"></script>
+<script src="../static/scripts/display.js"></script>
+</body>
+</html>

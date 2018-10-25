@@ -1,0 +1,61 @@
+{
+  "area": {
+    "jkt": {
+      "desc": "Teluk Jakarta",
+      "latlng": [0, 0],
+      "zoom": 0,
+      "data_prakiraan": {
+        "polygon":"jkt.geojson",
+        "data":[{
+          "name":"Area 1",
+          "color":"#fff",
+          "weather":"",
+          "weather_icon":"",
+          "wind":"",
+          "wind_dir":"",
+          "visibility":"",
+          "wave":"",
+          "temp":""
+        },{
+
+        },{
+
+        },{
+
+        },{
+
+        },{
+
+        },{
+
+        }]
+      }
+    },
+      "data_prakiraanmap": {},
+      "data_observasi": {
+        "items": [
+          {
+            "type": "timeseries",
+            "title": "Angin Permukaan",
+            "latlng": [0, 0],
+            "data": [
+              {
+                "datax": [],
+                "times": [],
+                "unit": "meter"
+              }
+            ]
+          },
+          {
+            "type": "raster",
+            "title": "Arus Permukaan",
+            "file": "",
+            "seg":[],
+            "seg_col": []
+          }
+        ]
+      },
+      "bali": {
+      }
+    }
+  }

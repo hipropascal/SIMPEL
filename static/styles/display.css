@@ -1,0 +1,297 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.leaflet-control-zoom{
+    display: none;
+    visibility: hidden;
+}
+/*div{*/
+    /*border: .5px solid grey;*/
+/*}*/
+
+#map{
+    position: absolute;
+    width : 100%;
+    height: 100%;
+    z-index: 0;
+    background-color: #1f2222;
+}
+
+.fullscreen-map{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.nav-main{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+}
+
+.nav-top{
+    display: flex;
+    flex: 3;
+    pointer-events: none;
+    flex-direction: column;
+}
+
+.nav-left{
+    width: 100px;
+}
+
+.close-nav-side{
+    background-color: #802021;
+    position: absolute;
+    width: 35px;
+    height: 40px;
+    right: -45px;
+    padding: 5px 0 0 10px;
+    top: 13px;
+    cursor: pointer;
+    color: white;
+}
+
+.nav-center{
+    flex: 4;
+}
+
+.nav-title{
+    background-color: rgba(61, 61, 61, 0.7);
+    display: flex;
+    height: 70px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    pointer-events: all;
+}
+
+.logo{
+    position: relative;
+    display: flex;
+    font-family: 'Niconne', cursive;
+    width: 100px;
+    height: 100%;
+    color: white;
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, 1);
+    font-size: 16pt;
+}
+
+.bmkg-logo{
+    background-color: #802021;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left:-60px;
+    top:10px;
+    background: url("../image/logo.png");
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:center center;
+}
+
+.svg-layer{
+    flex: 1;
+}
+
+.menu-button{
+    position: absolute;
+    width: 35px;
+    height: 40px;
+    left: 20px;
+    padding: 6px 0 0px 7px;
+    cursor: pointer;
+    color: white;
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, 1);
+}
+
+.nav-right{
+    flex: 1;
+}
+
+.nav-bottom{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    pointer-events: all;
+}
+
+.info-section{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.info{
+    background-color: rgb(76, 76, 76);
+    height: 50px;
+    width: 100%;
+    display: flex;
+}
+
+.info-group{
+    display: flex;
+    flex: 1;
+}
+
+.info-content{
+    flex: 1;
+    color: white;
+    padding:12px;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    font-size: 10pt;
+}
+
+.info-content:hover{
+    background-color: rgba(128, 32, 33, 0.67);
+    cursor: pointer;
+}
+
+.info-raster{
+    flex: 6;
+    display: flex;
+    color: white;
+    font-size: 12pt;
+}
+
+.colorbar-val{
+    font-size: 10pt;
+}
+
+.val1{
+    position: absolute;
+}
+
+.val1{
+    position: absolute;
+}
+
+.val1{
+    position: absolute;
+}
+
+.unit{
+    padding: 12px;
+    margin-left: 10px;
+    flex: 1;
+        align-self: center;
+    justify-self: center;
+}
+
+.play-button {
+    background-color: #a9262b;
+    width: 36px;
+    height: 41px;
+    border-radius: 50px;
+    margin: -15px 10px 10px 10px;
+    cursor: pointer;
+    color: white;
+    font-size: 23px;
+    padding: 15px 0px 0px 20px;
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, 1);
+}
+
+.circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    border: #e3323a solid 2px ;
+}
+
+.square {
+    width: 20px;
+    height: 20px;
+    border: #e3323a dashed 2px ;
+}
+
+.marker-1{
+    border: #70e33d solid 2px ;
+}
+
+.marker-2{
+    border: #4753ff solid 2px ;
+}
+
+.marker-3{
+    border: #e325e0 solid 2px ;
+}
+
+.marker-4{
+    border: #e39053 solid 2px ;
+}
+
+.marker-5{
+    border: #dde30d solid 2px ;
+}
+
+.marker-6{
+    border: #08dae3 solid 2px ;
+}
+
+.marker-7{
+    border: #e30d53 solid 2px ;
+}
+
+.marker-8{
+    border: #8a29e3 solid 2px ;
+}
+
+.marker-obs-1{
+    border: #70e33d dashed 2px ;
+}
+
+.marker-obs-2{
+    border: #4753ff dashed 2px ;
+}
+
+.marker-obs-3{
+    border: #e325e0 dashed 2px ;
+}
+
+.graph{
+    flex: 1;
+    background-color: rgba(226, 226, 226, 0.71);
+}
+
+.bottom-bar{
+    height: 20px;
+    background-color: #4e4e4e;
+    color: white;
+    font-size: 10pt;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+
+.nav-side{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.nav-left{
+    pointer-events: all;
+    background-color: rgba(122, 122, 122, 0.7);
+    position: absolute;
+    left: -240px;
+    width: 200px;
+    height: 100%;
+}
+
+.nav-right{
+    background-color: rgba(31, 174, 250, 0.7);
+    position: absolute;
+    right: 0;
+    width: 200px;
+    height: 100%;
+}

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BMKG Simple</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/leaflet.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/weather-ico/css/weather-icons-wind.min.css">
+    <link rel="stylesheet" href="/static/weather-ico/css/weather-icons.min.css">
+    <link rel="stylesheet" href="/static/styles/site.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/metrics-graphics/2.15.6/metricsgraphics.css">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="top-header">
+            <div class="top-header-left">
+                <div class="logo"></div>
+                <div class="top-header-space"></div>
+                <div class="name">
+                    <div class="title">BMKG - SIMPEL</div>
+                    <div class="publisher">Sistem Informasi Meteorologi Maritim Pelabuhan</div>
+                </div>
+            </div>
+            <div class="top-header-right">
+                <div class="outlink">
+                    <div style="flex: 1"></div>
+                    <div class="outlink-item"><a href="#">Tentang SIMPEL</a></div>
+                    <div class="outlink-item"><a href="http://maritim.bmkg.go.id/kontak_kami">Kontak Kami</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="menu-bar">
+            <div class="menu-space"></div>
+            <div class="menu-item" id="observasi">Observasi</div>
+            <div class="menu-space"></div>
+            <div class="menu-item" id="prakiraan">Prakiraan</div>
+            <div class="menu-space"></div>
+            <div class="menu-item" id="prakiraan_vs_observasi">Prakiraan vs Observasi</div>
+            <div class="menu-space"></div>
+            <div class="menu-item" id="peta_prakiraan">Peta Prakiraan</div>
+            <div class="menu-space"></div>
+        </div>
+        <div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content-warp">
+            <div class="nav">
+                <div class="param-select">
+                    <div class="input-area-group">
+                        <div class="form-label">
+                            Area Pelabuhan :
+                        </div>
+                        <div class="form-input">
+                            <select class="select-input-top-area" id="area">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group observasi">
+                        <div class="form-label">
+                            Instrument :
+                        </div>
+                        <div class="form-input">
+                            <select class="select-input-top" id="instrument">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group observasi">
+                        <div class="form-label">
+                            Parameter Observasi:
+                        </div>
+                        <div class="form-input">
+                            <select class="select-input-top" id="param-obs">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group prakiraan">
+                        <div class="form-label">
+                            Parameter Prakiraan:
+                        </div>
+                        <div class="form-input">
+                            <select class="select-input-top" id="param-pred">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group peta_prakiraan">
+                        <div class="form-label">
+                            Parameter Spasial:
+                        </div>
+                        <div class="form-input">
+                            <select class="select-input-top" id="param-predmap">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group prakiraan_vs_observasi">
+                        <div class="form-label">
+                            Parameter Observasi:
+                        </div>
+                        <div class="form-input">
+                            <select class="select-input-top" id="param-pvso-o">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group prakiraan_vs_observasi">
+                        <div class="form-label">
+                            Parameter Prediksi:
+                        </div>
+                        <div class="form-input">
+                            <select class="select-input-top" id="param-pvso-p">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="scroll-up-more">
+                </div>
+                <div class="info-list">
+                    <div class="info-scroll">
+                        <div id="list-menu">
+
+                        </div>
+                        <div style="height: 50px"></div>
+                    </div>
+                </div>
+                <div class="scroll-down-more">
+                    <div style="margin-top: 99px">Scroll Kebawah <i class="fas fa-chevron-circle-down"></i></div>
+                </div>
+            </div>
+            <div class="map-area" id="map-area">
+                <div class="map" id="map">
+                </div>
+                <div class="fullscreen-map" style="pointer-events: none;pointer-events: none;z-index: 1000;opacity: .7">
+                    <canvas class="fullscreen-map" id="cvs-raster"></canvas>
+                </div>
+                <div class="fullscreen-map"
+                     style="pointer-events: none;pointer-events: none;z-index: 1000;display: none">
+                    <canvas class="fullscreen-map" id="cvs-data"></canvas>
+                </div>
+                <div class="fullscreen-map" style="pointer-events: none;pointer-events: none;z-index: 1000;">
+                    <canvas class="fullscreen-map" id="cvs-animate"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div style="flex: 1"></div>
+        <div>© BMKG Pusat Meteorologi Maritim 2018</div>
+        <div style="flex: 1"></div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/metrics-graphics/2.15.6/metricsgraphics.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/leaflet.js"></script>
+<script src="/static/scripts/misc.js"></script>
+<script src="/static/scripts/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "units": {
+    "angin__arah.": "Derajat",
+    "angin__kecepatan": "Meter/Detik",
+    "kelembapan": "%",
+    "tekanan": "hpa",
+    "temperatur": "C",
+    "tinggi_permukaan_air": "Meter",
+    "gelombang__arah": "Derajat",
+    "gelombang__tinggi":"Meter",
+    "gelombang__periode":"Detik"
+  },
+  "seg":{
+    "angin__arah.": [],
+    "angin__kecepatan": [],
+    "kelembapan": [],
+    "tekanan": [],
+    "temperatur": [],
+    "tinggi_permukaan_air": []
+  }
+}
