@@ -163,8 +163,8 @@ function loadData() {
                     layer_point.addTo(map);
                     // formating time
                     var dateTime = datavs[i].data;
-                    for(var x = 0; x < dateTime.length; x++){
-                        for(var y =0; y< dateTime[x].length; y++){
+                    for (var x = 0; x < dateTime.length; x++) {
+                        for (var y = 0; y < dateTime[x].length; y++) {
                             dateTime[x][y].date = new Date(dateTime[x][y].date);
                         }
                     }
@@ -178,7 +178,7 @@ function loadData() {
                         data: dateTime,
                         target: '#graph' + alfabet[i],
                         area: [false, true],
-                        colors : ['#00158c','#8C001A'],
+                        colors: ['#00158c', '#8C001A'],
                         y_extended_ticks: true,
                         x_accessor: 'date'
                     });
@@ -192,6 +192,7 @@ function loadData() {
         $.get('api/prakiraan/all_param/' + area, function (res) {
             var selectparam = $('#param-pred');
             var params = res.param;
+            selectparam.append('<option value="summary-pred">Info Cuaca</option>');
             for (var i = 0; i < params.length; i++) {
                 var name = params[i].split('.')[0].split('_')[1];
                 var option = '<option value="' + params[i] + '">' + name + '</option>';
@@ -269,13 +270,24 @@ function load_param_obs() {
 }
 
 function load_param_pred() {
+    reset();
     var area = $('#area').val();
     var param = $('#param-pred').val();
     var param_name = $('#param-pred').find(":selected").text();
-    layer_point.clearLayers();
-    layer_point.removeFrom(map);
-    if (param === "summary") {
-
+    if (param === 'summary-pred') {
+        $.get('/page_ajax/pred', function (page) {
+            $("#list-menu").append(page);
+            $.get('/api/prakiraan/' + area, function (res) {
+                var location = res.data;
+                for (var i = 0; i < location.length; i++) {
+                    var divlabel = divmarker2.replaceAll('label', alfabet[i]).replaceAll('#ffffff', 'transparent');
+                    var icon = L.divIcon({html: divlabel});
+                    var marker_obs = L.marker([parseFloat(location[i].coor.split('_')[0]), parseFloat(location[i].coor.split('_')[1])], {icon: icon});
+                    layer_point.addLayer(marker_obs);
+                }
+                layer_point.addTo(map);
+            })
+        })
     } else {
         $.get('/page_ajax/point', function (page) {
             $("#list-menu").html('');
