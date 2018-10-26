@@ -29,6 +29,12 @@ select {
     white-space: nowrap;
 }
 
+.modal-content {
+    padding: 15px;
+    background: #5f9ea094;
+    border-radius: 5px;
+}
+
 /*::-webkit-scrollbar {*/
 /*width: 5px;*/
 /*height: 5px;*/

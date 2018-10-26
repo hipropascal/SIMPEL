@@ -101,7 +101,7 @@ def api_list_obs_spot_all(area, instrument):
         list_param = list_dir(inst_path)
         for param in list_param:
             parsed = param.split('_')
-            obj_param = {'id':parsed[0], 'name':parsed[1], 'filename': param }
+            obj_param = {'id': parsed[0], 'name': parsed[1], 'filename': param}
             list_all_param.append(obj_param)
         return jsonify({'params': list_all_param})
 
@@ -133,12 +133,12 @@ def api_get_obs_data(area, instrument, filename):
             arr = csv_to_arr(csv_file)
             coor_id.append(coor)
             coor_data.append(arr)
-        return jsonify({'location':coor_id,'data':coor_data})
+        return jsonify({'location': coor_id, 'data': coor_data})
 
 
 @app.route("/api/observasi/grid/get_date/<area>/<instrument>/<param>")
-def api_get_obs_grid(area,instrument,param):
-    image_list = list_file('data/data_trees/{}/observasi/{}/{}'.format(area,instrument,param))
+def api_get_obs_grid(area, instrument, param):
+    image_list = list_file('data/data_trees/{}/observasi/{}/{}'.format(area, instrument, param))
     date_only_s = []
     for image in image_list:
         date_only = image.split(' ')[0]
@@ -149,15 +149,15 @@ def api_get_obs_grid(area,instrument,param):
         hour_in_date = []
         for image in image_list:
             if date in image:
-                hour_in_date.append(image.split(' ')[1].split('.')[0].replace('_',':'))
-        date_obj = {'date':date,'hours':hour_in_date}
+                hour_in_date.append(image.split(' ')[1].split('.')[0].replace('_', ':'))
+        date_obj = {'date': date, 'hours': hour_in_date}
         date_arr.append(date_obj)
-    return jsonify({'data':date_arr})
+    return jsonify({'data': date_arr})
 
 
 @app.route("/api/observasi/grid/get_raster/<area>/<instrument>/<param>/<filename>")
-def api_get_obs_raster(area,instrument,param,filename):
-    return send_file('data/data_trees/{}/observasi/{}/{}/{}'.format(area, instrument, param,filename))
+def api_get_obs_raster(area, instrument, param, filename):
+    return send_file('data/data_trees/{}/observasi/{}/{}/{}'.format(area, instrument, param, filename))
 
 
 @app.route('/api/get_geojson/')
@@ -167,11 +167,11 @@ def get_geo_json():
     geos = []
     for area in areas:
         path = 'data/data_trees/{}/__polygon/'.format(area)
-        geofile = path+list_file(path)[0]
+        geofile = path + list_file(path)[0]
         with open(geofile) as json_data:
             d = json.load(json_data)
             geos.append(d)
-    return jsonify({'data':geos})
+    return jsonify({'data': geos})
 
 
 @app.route('/api/prakiraan/all_param/<area>/')
@@ -182,8 +182,8 @@ def api_list_pred_param(area):
     for pred in list_pred:
         parse_info = pred.split('__')
         coor = list_dir(path + pred)[0]
-        params = list_file(path + pred+'/'+coor)
-        par_items = par_items+params
+        params = list_file(path + pred + '/' + coor)
+        par_items = par_items + params
     bundle = {'param': remove_duplicates(par_items)}
     return jsonify(bundle)
 
@@ -200,17 +200,17 @@ def api_list_pred(area):
         id = parse_id_name[0]
         name = ' '.join(parse_id_name[1:])
         coor = list_dir(path + pred)[0]
-        loc_item = {'id': id, 'name': name, 'cat': category, 'foldername': pred, 'coor':coor}
+        loc_item = {'id': id, 'name': name, 'cat': category, 'foldername': pred, 'coor': coor}
         loc_items.append(loc_item)
     bundle = {'data': loc_items}
     return jsonify(bundle)
 
 
 @app.route('/api/prakiraan/data/<area>/<coor>/<loc>/<file>')
-def api_list_pred_data(area,coor,loc,file):
-    path = 'data/data_trees/' + area + '/prakiraan/' +loc+'/'+ coor+ '/' + file
+def api_list_pred_data(area, coor, loc, file):
+    path = 'data/data_trees/' + area + '/prakiraan/' + loc + '/' + coor + '/' + file
     arr = csv_to_arr(path)
-    return jsonify({'data':arr})
+    return jsonify({'data': arr})
 
 
 @app.route('/api/peta-prakiraan/all_param/<area>')
@@ -220,13 +220,13 @@ def api_list_predmap_param(area):
     param_list = []
     for param in params:
         id = param.split('_')[0]
-        param_list.append({'id':id,'foldername':param})
+        param_list.append({'id': id, 'foldername': param})
     return jsonify({'data': param_list})
 
 
 @app.route('/api/peta-prakiraan/date/<area>/<param>')
-def api_get_date_predmap(area,param):
-    image_list = list_file('data/data_trees/{}/peta_prakiraan/{}'.format(area,param))
+def api_get_date_predmap(area, param):
+    image_list = list_file('data/data_trees/{}/peta_prakiraan/{}'.format(area, param))
     date_only_s = []
     for image in image_list:
         date_only = image.split(' ')[0]
@@ -237,16 +237,35 @@ def api_get_date_predmap(area,param):
         hour_in_date = []
         for image in image_list:
             if date in image:
-                hour_in_date.append(image.split(' ')[1].split('.')[0].replace('_',':'))
-        date_obj = {'date':date,'hours':hour_in_date}
+                hour_in_date.append(image.split(' ')[1].split('.')[0].replace('_', ':'))
+        date_obj = {'date': date, 'hours': hour_in_date}
         date_arr.append(date_obj)
-    return jsonify({'data':date_arr})
+    return jsonify({'data': date_arr})
 
 
 @app.route('/api/peta-prakiraan/get_data/<area>/<param>/<file>')
-def api_get_data_predmap(area,param,file):
-    path = 'data/data_trees/{}/peta_prakiraan/{}/{}'.format(area,param,file)
+def api_get_data_predmap(area, param, file):
+    path = 'data/data_trees/{}/peta_prakiraan/{}/{}'.format(area, param, file)
     return send_file(path)
+
+
+@app.route('/api/peta-perkiraan/get_static_image/<area>/<param>.png')
+def api_get_image_static_predmap(area, param):
+    path = 'data/data_trees/{}/peta_prakiraan_static/{}.png'.format(area, param)
+    return send_file(path)
+
+
+@app.route('/api/prakiraan_vs_observasi/get_data/<area>')
+def api_get_data_prakiraan_vs_observasi(area):
+    path = 'data/data_trees/{}/prakiraan_vs_observasi/'.format(area)
+    bundle = []
+    arr = []
+    list_coor = list_dir(path)
+    for coor in list_coor:
+        filename = list_file(path + coor)[0]
+        arr_data = csv_formater(path + coor+'/'+filename)
+        bundle.append({'coor': coor, 'filename': filename, 'data': arr_data})
+    return jsonify({'data':bundle})
 
 
 def list_dir(path):
@@ -267,6 +286,25 @@ def csv_to_arr(path):
     return results
 
 
+def csv_formater(path):
+    csv = open(path)
+    lines = csv.readlines()
+    obj1_arr = []
+    obj2_arr = []
+    for line in lines:
+        linef = line.replace('\r\n','')
+        parsed = linef.split(',')
+        time = parsed[0]
+        val1 = parsed[1]
+        val2 = parsed[2]
+        obj1 = {'date':time,'value':float(val1)}
+        obj1_arr.append(obj1)
+        if parsed[2] != '':
+            obj2 = {'date':time,'value':float(val2)}
+            obj2_arr.append(obj2)
+    return [obj1_arr,obj2_arr]
+
+
 def remove_duplicates(listofElements):
     uniqueList = []
     for elem in listofElements:
@@ -276,5 +314,6 @@ def remove_duplicates(listofElements):
 
 
 if __name__ == '__main__':
+    csv_formater('/Users/maritim/Project/BMKG/SIMPEL/data/data_trees/2_pelabuhan jakarta__-6.010565__106.853122__11/prakiraan_vs_observasi/-6.086597_106.884488/1_Tinggi Gelombang - ADCP VS Prakiraan (meter).csv')
     # api_all_area()
-    app.run(debug=True, host='0.0.0.0' ,port=8180)
+    app.run(debug=True, host='0.0.0.0', port=8180)

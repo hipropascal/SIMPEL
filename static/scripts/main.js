@@ -66,6 +66,7 @@ function byteString(n) {
 function initPage() {
 
     // interaksi menu bar
+    $('.modal').hide();
     $(".menu-item[id=" + activemenu + "]").animate({
         "background-color": "#20a95e",
         "margin": "-3px 0px 0px 0px",
@@ -119,6 +120,8 @@ function selectMenu(selected) {
 
 }
 
+var datavs;
+
 // ================================= Data Handler ===================================
 
 
@@ -133,7 +136,6 @@ function loadData() {
     if (activemenu === "observasi") {
         $('#instrument').html('');
         $.get('api/observasi/' + area, function (data) {
-            console.log(data);
             instruments = data.data;
             for (var instrument of instruments) {
                 $('#instrument').append('<option value="' + instrument.foldername + '">' + instrument.name + '</option>');
@@ -142,7 +144,48 @@ function loadData() {
         });
     }
     if (activemenu === "prakiraan_vs_observasi") {
-        // TODO
+        reset();
+        $.get('/api/prakiraan_vs_observasi/get_data/' + area, function (res) {
+            datavs = res.data;
+            $.get('/page_ajax/point2', function (page) {
+                for (var i = 0; i < datavs.length; i++) {
+                    var coor = datavs[i].coor;
+                    var lat = coor.split('_')[0];
+                    var lng = coor.split('_')[1];
+                    var filename = datavs[i].filename;
+                    var name = filename.split('_')[1].split('.')[0];
+                    var html = page.replaceAll('{label}', alfabet[i]).replaceAll('{param}', name).replaceAll('#ffffff', color[i]);
+                    var divlabel = divmarker.replaceAll('label', alfabet[i]).replaceAll('#ffffff', color[i]);
+                    $("#list-menu").append(html);
+                    var icon = L.divIcon({html: divlabel});
+                    var marker_obs = L.marker([lat, lng], {icon: icon});
+                    layer_point.addLayer(marker_obs);
+                    layer_point.addTo(map);
+                    // formating time
+                    var dateTime = datavs[i].data;
+                    for(var x = 0; x < dateTime.length; x++){
+                        for(var y =0; y< dateTime[x].length; y++){
+                            dateTime[x][y].date = new Date(dateTime[x][y].date);
+                        }
+                    }
+                    MG.data_graphic({
+                        width: 450,
+                        height: 180,
+                        right: 40,
+                        left: 30,
+                        top: 20,
+                        bottom: 30,
+                        data: dateTime,
+                        target: '#graph' + alfabet[i],
+                        area: [false, true],
+                        colors : ['#00158c','#8C001A'],
+                        y_extended_ticks: true,
+                        x_accessor: 'date'
+                    });
+                }
+                // TODO
+            })
+        })
     }
     if (activemenu === "prakiraan") {
         $('#param-pred').html('');
@@ -272,13 +315,14 @@ function load_param_pred_map() {
         }
         $.get('/page_ajax/grid', function (res) {
             reset();
+            var img_src = window.location.href + 'api/peta-perkiraan/get_static_image/' + area + '/' + param_name + '.png';
             var title = param.split('__')[0].split('_')[1];
             var rasgrad = gradient['Delf3d|' + param_name];
             var list = '';
             for (var i = 0; i < rasgrad.length; i++) {
                 list = list + '<div>' + rasgrad[i] + '</div>';
             }
-            var html = res.replace('{title}', title).replace('{list}', list);
+            var html = res.replace('{title}', title).replace('{list}', list).replace('{img_src}', img_src);
             $("#list-menu").append(html);
             $("#date-grid").datepicker({
                 dateFormat: 'dd-mm-yy',
@@ -304,6 +348,19 @@ function load_param_pred_map() {
                 }
             });
             loadImagePredMap();
+            $('.img-predmap').click(function () {
+                var modal = $('.modal');
+                var modal_content = $('.modal-content');
+                modal_content.html('');
+                var image_copy = $(this).clone();
+                image_copy.attr('width', 'auto');
+                image_copy.attr('height', parseInt($(window).height()) - 400);
+                modal_content.append(image_copy);
+                modal.fadeIn(100);
+                modal.click(function () {
+                    $(this).fadeOut(100);
+                })
+            });
         });
     });
 }
@@ -414,6 +471,7 @@ function loadLayerObs(category, data, order) {
                 top: 20,
                 bottom: 30,
                 // buffer:0,
+                y_extended_ticks: true,
                 target: '#graph' + alfabet[order],
                 x_accessor: 'date',
                 y_accessor: 'value',
@@ -440,6 +498,7 @@ function loadLayerPred(area, coor, loc, param, order) {
             top: 20,
             bottom: 30,
             // buffer:0,
+            y_extended_ticks: true,
             target: '#graph' + alfabet[order],
             x_accessor: 'date',
             y_accessor: 'value',
