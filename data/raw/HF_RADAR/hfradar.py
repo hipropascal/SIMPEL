@@ -30,4 +30,4 @@ for file in glob.glob("*.nc"):
 #114.433235 - 114.435916
 
 # /Users/maritim/Project/BMKG/SIMPEL/data/data_trees/0_ketapang gilimanuk__-8.148774__114.420108__13/observasi/3_HF Radar__grid/0_Arus (knot)|0|8/11-10-2018 21_30.png
-# /Users/maritim/Project/BMKG/SIMPEL/data/data_trees/0_ketapang gilimanuk__-8.148774__114.420108__13/peta_prakiraan/1_Level Permukaan(meter)__grid/11-10-2018 21_30.png
+# /Users/maritim/Project/BMKG/SIMPEL/data/data_trees/0_ketapang gilimanuk__-8.148774__114.420108__13/peta_prakiraan/1_Tinggi Muka Air(meter)__grid/11-10-2018 21_30.png

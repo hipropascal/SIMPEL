@@ -36,7 +36,7 @@ def regridJakarta():
     wave_dir_tkl = '/Users/maritim/Project/BMKG/SIMPEL/data/raw/model_delf3d/2_pelabuhan jakarta/wave_dir.tkl'
     target_folder_wave = '/Users/maritim/Project/BMKG/SIMPEL/data/data_trees/2_pelabuhan jakarta__-6.010565__106.853122__11/peta_prakiraan/0_Gelombang(meter)__grid/'
     target_folder_current = '/Users/maritim/Project/BMKG/SIMPEL/data/data_trees/2_pelabuhan jakarta__-6.010565__106.853122__11/peta_prakiraan/3_Arus(m s^-1)__grid/'
-    target_folder_level = '/Users/maritim/Project/BMKG/SIMPEL/data/data_trees/2_pelabuhan jakarta__-6.010565__106.853122__11/peta_prakiraan/1_Level Permukaan(meter)__grid/'
+    target_folder_level = '/Users/maritim/Project/BMKG/SIMPEL/data/data_trees/2_pelabuhan jakarta__-6.010565__106.853122__11/peta_prakiraan/1_Tinggi Muka Air(meter)__grid/'
     target_folder_wind = '/Users/maritim/Project/BMKG/SIMPEL/data/data_trees/2_pelabuhan jakarta__-6.010565__106.853122__11/peta_prakiraan/2_Angin(m s^-1)__grid/'
     tkl_height = 82
     tkl_width = 139
